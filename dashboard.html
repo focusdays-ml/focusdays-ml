@@ -162,7 +162,7 @@
 				$('#locationName').html(getUrlParameter("locationName"));
 			})
       	</script>
-		<div class="agencies__searchbox">
+		<div class="agencies__searchbox" style="padding-bottom: 8rem;">
 			<picture class="picture keyvisual">
 			  <source srcset="/images/agency-search-bg.png?w=1440&amp;h=480, /images/agency-search-bg.png?w=2880&amp;h=960 1.5x" media="(min-width: 1025px)">
 			  <source srcset="/images/agency-search-bg.png?w=1024&amp;h=480, /images/agency-search-bg.png?w=2048&amp;h=960 1.5x" media="(min-width: 769px)">
@@ -178,8 +178,15 @@
 			  </div>
 			  <div class="agencies__searchbox__title">Should I be scared in <span id="locationName" style="color:#ff1821"></span></div>
 			</div>
-	      	<div class="predictions">
-	      		<div class="prediction-list">
+	      	<div class="predictions" style="background: transparent;
+    top: 15rem;
+    left: 0;
+    position: absolute;
+    width: 100%;">
+	      		<div class="prediction-list" style="background-color: white;
+    width: 680px;
+    height: 350px;
+    display: inline-block;">
 	      			<span class="accidents">Accident Risk</span><span id="accident-prediction"></span>
 	      		</div>
 	      	</div>
