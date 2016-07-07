@@ -162,8 +162,23 @@
 				$('#locationName').html(getUrlParameter("locationName"));
 			})
       	</script>
-
-      	<div class="icon-teaser__item__text" id="locationName" style="text-align: center"></div>
+		<div class="agencies__searchbox">
+			<picture class="picture keyvisual">
+			  <source srcset="/images/agency-search-bg.png?w=1440&amp;h=480, /images/agency-search-bg.png?w=2880&amp;h=960 1.5x" media="(min-width: 1025px)">
+			  <source srcset="/images/agency-search-bg.png?w=1024&amp;h=480, /images/agency-search-bg.png?w=2048&amp;h=960 1.5x" media="(min-width: 769px)">
+			  <source srcset="/images/agency-search-bg.png?w=768&amp;h=392, /images/agency-search-bg.png?w=1536&amp;h=784 1.5x" media="(min-width: 481px)">
+			  <source srcset="/images/agency-search-bg.png?w=480&amp;h=240, /images/agency-search-bg.png?w=960&amp;h=480 1.5x" media="(min-width: 321px)">
+			  <source srcset="/images/agency-search-bg.png?w=320&amp;h=240, /images/agency-search-bg.png?w=640&amp;h=480 1.5x"><img src="Agency%20Search%20Page_files/agency-search-bg.png" alt="Key Visual" data-object-fit="cover" class="picture__image keyvisual__image">
+			</picture>
+			<div class="agencies__searchbox__content">
+			  <div class="agencies__searchbox__icon-wrapper">
+			      <svg class="agencies__searchbox__icon">
+			        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="images/icons.svg#agencysearch"></use>
+			      </svg>
+			  </div>
+			  <div class="agencies__searchbox__title" id="locationName">Should I be scared in <span id="locationName"></span></div>
+			</div>
+		</div>
 
       	<div class="predictions">
       		<span class="accidents">Accident Risk</span><span id="accident-prediction"></span>
