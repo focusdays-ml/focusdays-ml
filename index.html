@@ -124,8 +124,10 @@
 
                   <script>
                   $(document).keypress(function(e) {
+                          			console.log("keypress")
                       if(e.which == 13) {
                           var input_address = $("#input_address").val();  
+                          			console.log("value=" + input_address)
                           var geocoder = new google.maps.Geocoder();  
                           geocoder.geocode( { address: input_address }, function(results, status) {  
                               if (status == google.maps.GeocoderStatus.OK) {  
