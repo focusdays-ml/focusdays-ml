@@ -135,7 +135,7 @@
                                   var lng = results[0].geometry.location.lng();
 
                           			console.log("lng: " + lng + ", lat=" + lat)
-                                  window.location.href = "dashboard.html?locationName=" + input_address + "&lat" + lat + "&lon" + lng;
+                                  window.location.href = "dashboard.html?locationName=" + input_address + "&lat=" + lat + "&lon=" + lng;
                                 } else {
                           			console.log("Geocoder failed with error: " + status)
                                 }
