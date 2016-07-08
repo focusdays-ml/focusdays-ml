@@ -116,12 +116,12 @@
     			    }
     			};
 
-          function addRiskIndicator(risk, value) {
-
+          String.prototype.cap = function() {
+              return this.charAt(0).toUpperCase() + this.slice(1);
           }
 
       		function receivedPredictionForRisk(risk, response) {
-      			$('.prediction-list').append('<span class="accidents" style="width: 10rem;display: inline-block;">' + risk + ' Risk</span>' +
+      			$('.prediction-list').append('<span class="accidents" style="width: 10rem;display: inline-block;">' + risk.cap() + ' Risk</span>' +
               '<div class="form__group__control" style="display:inline-block">' +
                 '<div data-segmented-control="data-segmented-control" class="segmented-control segmented-control--js" tabindex="0">' +
                   '<label class="segmented-control__item" style="background-color: #0062a9;color: white;">' +
