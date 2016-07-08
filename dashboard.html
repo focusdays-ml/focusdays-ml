@@ -145,10 +145,10 @@
     				  }
     				});
 
-            setTimeout(250, function() {
+            setTimeout(function() {
             console.log("test2")
               receivedPredictionForRisk(risk, {"Results":{"output1":{"type":"table","value":{"ColumnNames":["Scored Labels"],"ColumnTypes":["Double"],"Values":[["4.21712875366211"]]}}}});
-            })
+            }, 250)
 
     				xhr.open("POST", "https://pmgeiser.ch/axa-ml/a_" + risk + ".php?lat="+lat+"&lon="+lon);
     				xhr.setRequestHeader("authorization", "Bearer u9FjX2cDGUiBU4Qa6vk1Ti78vQr1HM4NLSwGKwLF8H9cnNwmTKFYewkI9TiYwnokbpmFgnlS7Dt6rtq8fjaZxg==");
