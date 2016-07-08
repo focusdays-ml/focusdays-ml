@@ -117,6 +117,8 @@
     			};
 
       		function receivedPredictionForRisk(risk, response) {
+            console.log("test")
+              console.log("received " + risk + ":" + JSON.stringify(response))
       			$('#' + risk + '-prediction').html(JSON.stringify(response));
       		}
 
@@ -142,7 +144,8 @@
     				  }
     				});
 
-            setTimeout(150, function() {
+            setTimeout(250, function() {
+            console.log("test2")
               receivedPredictionForRisk(risk, {"Results":{"output1":{"type":"table","value":{"ColumnNames":["Scored Labels"],"ColumnTypes":["Double"],"Values":[["4.21712875366211"]]}}}});
             })
 
