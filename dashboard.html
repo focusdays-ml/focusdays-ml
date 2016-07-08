@@ -123,7 +123,16 @@
 
       		function receivedPredictionForRisk(risk, response) {
             var prediction = response.Results.output1.value.Values[0][0];
-            console.log(risk + ' : ' + prediction)
+
+            if(risk == 'earthquake') {
+              if(prediction < 6) {
+                prediction = 3;
+              } else if(prediction < 10) {
+                prediction = 2;
+              } else {
+                prediction = 1;
+              }
+            }
 
             var icon = 'fa-taxi';
             if(risk == 'earthquake') {
