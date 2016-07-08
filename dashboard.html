@@ -116,22 +116,37 @@
     			    }
     			};
 
-      		function receivedPredictionForAccidents(response) {
-      			console.log(response)
-      			$('#accident-prediction').html(JSON.stringify(response));
+      		function receivedPredictionForRisk(risk, response) {
+      			$('#' + risk + '-prediction').html(JSON.stringify(response));
       		}
 
-      		function requestPredictionForAccidents(lon, lat) {
+          function requestPredictionForAccidents(lon, lat) {
+            requestPredictionForRisk(lon, lat, 'accident')
+          }
+
+          function requestPredictionForEarthquake(lon, lat) {
+            requestPredictionForRisk(lon, lat, 'earthquake')
+          }
+
+          function requestPredictionForCrime(lon, lat) {
+            requestPredictionForRisk(lon, lat, 'crime')
+          }
+
+      		function requestPredictionForRisk(lon, lat, risk) {
     				var xhr = new XMLHttpRequest();
     				xhr.withCredentials = true;
     				 
     				xhr.addEventListener("readystatechange", function () {
     				  if (this.readyState === 4) {
-    				    receivedPredictionForAccidents(JSON.parse(this.responseText));
+    				    receivedPredictionForRisk(risk, JSON.parse(this.responseText));
     				  }
     				});
-    				 
-    				xhr.open("POST", "https://pmgeiser.ch/axa-ml/a_earthquake.php?lat="+lat+"&lon="+lon);
+
+            setTimeout(150, function() {
+              receivedPredictionForRisk(risk, {"Results":{"output1":{"type":"table","value":{"ColumnNames":["Scored Labels"],"ColumnTypes":["Double"],"Values":[["4.21712875366211"]]}}}});
+            })
+
+    				xhr.open("POST", "https://pmgeiser.ch/axa-ml/a_" + risk + ".php?lat="+lat+"&lon="+lon);
     				xhr.setRequestHeader("authorization", "Bearer u9FjX2cDGUiBU4Qa6vk1Ti78vQr1HM4NLSwGKwLF8H9cnNwmTKFYewkI9TiYwnokbpmFgnlS7Dt6rtq8fjaZxg==");
     				xhr.setRequestHeader("content-type", "application/json");
     				xhr.setRequestHeader("cache-control", "no-cache");
@@ -141,17 +156,19 @@
 			     }
 
       			$(document).ready(function() {
-      				requestPredictionForAccidents(getUrlParameter("lon"), getUrlParameter("lat"))
+      				requestPredictionForEarthquake(getUrlParameter("lon"), getUrlParameter("lat"))
+              requestPredictionForAccidents(getUrlParameter("lon"), getUrlParameter("lat"))
+              requestPredictionForCrime(getUrlParameter("lon"), getUrlParameter("lat"))
       				$('#locationName').html(getUrlParameter("locationName"));
       			})
       	</script>
 		<div class="agencies__searchbox" style="padding-bottom: 8rem;">
 			<picture class="picture keyvisual">
-			  <source srcset="/images/agency-search-bg.png?w=1440&amp;h=480, /images/agency-search-bg.png?w=2880&amp;h=960 1.5x" media="(min-width: 1025px)">
-			  <source srcset="/images/agency-search-bg.png?w=1024&amp;h=480, /images/agency-search-bg.png?w=2048&amp;h=960 1.5x" media="(min-width: 769px)">
-			  <source srcset="/images/agency-search-bg.png?w=768&amp;h=392, /images/agency-search-bg.png?w=1536&amp;h=784 1.5x" media="(min-width: 481px)">
-			  <source srcset="/images/agency-search-bg.png?w=480&amp;h=240, /images/agency-search-bg.png?w=960&amp;h=480 1.5x" media="(min-width: 321px)">
-			  <source srcset="/images/agency-search-bg.png?w=320&amp;h=240, /images/agency-search-bg.png?w=640&amp;h=480 1.5x"><img src="Agency%20Search%20Page_files/agency-search-bg.png" alt="Key Visual" data-object-fit="cover" class="picture__image keyvisual__image">
+			  <source srcset="images/agency-search-bg.png?w=1440&amp;h=480, images/agency-search-bg.png?w=2880&amp;h=960 1.5x" media="(min-width: 1025px)">
+			  <source srcset="images/agency-search-bg.png?w=1024&amp;h=480, images/agency-search-bg.png?w=2048&amp;h=960 1.5x" media="(min-width: 769px)">
+			  <source srcset="images/agency-search-bg.png?w=768&amp;h=392, images/agency-search-bg.png?w=1536&amp;h=784 1.5x" media="(min-width: 481px)">
+			  <source srcset="images/agency-search-bg.png?w=480&amp;h=240, images/agency-search-bg.png?w=960&amp;h=480 1.5x" media="(min-width: 321px)">
+			  <source srcset="images/agency-search-bg.png?w=320&amp;h=240, images/agency-search-bg.png?w=640&amp;h=480 1.5x"><img src="Agency%20Search%20Page_files/agency-search-bg.png" alt="Key Visual" data-object-fit="cover" class="picture__image keyvisual__image">
 			</picture>
 			<div class="agencies__searchbox__content">
 			  <div class="agencies__searchbox__icon-wrapper">
@@ -171,7 +188,7 @@
     height: 350px;
     display: inline-block;
     padding: 1rem;">
-	      			<span class="accidents">Accident Risk</span><span id="accident-prediction"></span>
+	      			<span class="accidents">Accident Risk</span><div id="accident-prediction"></div><div id="earthquake-prediction"></div><div id="crime-prediction"></div>
 	      			<div class="form__group__control"><div data-segmented-control="data-segmented-control" class="segmented-control segmented-control--js" tabindex="0"><label class="segmented-control__item" style="
     background-color: #0062a9;
     color: white;
