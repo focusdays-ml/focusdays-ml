@@ -122,22 +122,24 @@
           }
 
       		function receivedPredictionForRisk(risk, response) {
+            var prediction = response.Results.output1.value.Values[0][0];
+            console.log(risk + ' : ' + prediction)
+
             var icon = 'fa-taxi';
-            console.log(risk)
             if(risk == 'earthquake') {
               icon = 'fa-exclamation-circle'
             } else if (risk == 'accident') {
               icon = 'fa-ambulance'
             }
 
-      			$('.prediction-list').append('<span class="accidents" style="width: 10rem;display: inline-block;margin-top: 2rem;text-align:left;">' +
+      			$('.prediction-list').append('<span style="width: 10rem;display: inline-block;margin-top: 2rem;text-align:left;">' +
               '<i class="fa ' + icon + '" aria-hidden="true" style="margin-right:1rem"></i>' + risk.cap() + '</span>' +
-              '<div class="form__group__control" style="display:inline-block">' +
+              '<div id="' + risk + '-container" class="form__group__control" style="display:inline-block">' +
                 '<div data-segmented-control="data-segmented-control" class="segmented-control segmented-control--js" tabindex="0">' +
-                  '<label class="segmented-control__item" style="background-color: #0062a9;color: white;">' +
+                  '<label class="segmented-control__item">' +
                     '<span class="segmented-control__item__label">low</span>' +
                   '</label>' +
-                  '<label class="segmented-control__item is-active">' +
+                  '<label class="segmented-control__item">' +
                     '<span class="segmented-control__item__label">med</span>' +
                   '</label>' +
                   '<label class="segmented-control__item">' +
@@ -145,6 +147,10 @@
                   '</label>' +
                 '</div>' +
               '</div><br/>');
+
+            for(var i = 1; i <= 3 - prediction; ++i) {
+              $('#' + risk + '-container > div segmented-control__item:nth-child(' + i + ')').addClass('is-active')
+            }
       		}
 
           function requestPredictionForAccidents(lon, lat) {
@@ -170,7 +176,14 @@
     				});
 
             setTimeout(function() {
-              receivedPredictionForRisk(risk, {"Results":{"output1":{"type":"table","value":{"ColumnNames":["Scored Labels"],"ColumnTypes":["Double"],"Values":[["4.21712875366211"]]}}}});
+              receivedPredictionForRisk(risk, 
+                {"Results":
+                  {"output1":
+                    {"type":"table","value":
+                      {"ColumnNames":["Scored Labels"],"ColumnTypes":["Double"],"Values":[["4.21712875366211"]]}
+                    }
+                  }
+                });
             }, 250)
 
     				xhr.open("POST", "https://pmgeiser.ch/axa-ml/a_" + risk + ".php?lat="+lat+"&lon="+lon);
@@ -215,7 +228,6 @@
     height: 350px;
     display: inline-block;
     padding: 1rem;">
-
 	      		</div>
 	      	</div>
 		</div>
