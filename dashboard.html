@@ -152,14 +152,14 @@
     				xhr.setRequestHeader("cache-control", "no-cache");
     				xhr.setRequestHeader("postman-token", "810ac858-23b0-6a0e-69da-ddd20cf3a39f");
     				 
-    				xhr.send();
+    				//xhr.send();
 			     }
 
       			$(document).ready(function() {
       				requestPredictionForEarthquake(getUrlParameter("lon"), getUrlParameter("lat"))
               requestPredictionForAccidents(getUrlParameter("lon"), getUrlParameter("lat"))
               requestPredictionForCrime(getUrlParameter("lon"), getUrlParameter("lat"))
-      				$('#locationName').html(getUrlParameter("locationName"));
+      				$('#locationName').html(getUrlParameter("locationName"))
       			})
       	</script>
 		<div class="agencies__searchbox" style="padding-bottom: 8rem;">
