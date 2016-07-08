@@ -126,6 +126,10 @@
       		function receivedPredictionForRisk(risk, response) {
             var prediction = response.Results.output1.value.Values[0][0];
 
+            if(risk == 'crime') {
+              prediction = 4 - prediction
+            }
+
             if(risk == 'earthquake') {
               if(prediction < 4.5) {
                 prediction = 3;
