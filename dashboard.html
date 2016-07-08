@@ -9,6 +9,7 @@
     <title>Agency Search Page</title>
     <link rel="stylesheet" href="Agency%20Search%20Page_files/1da4c08a-73a4-4e34-8997-1c1eeb1a8cca.css">
     <link rel="stylesheet" href="Agency%20Search%20Page_files/aem.css">
+    <link rel="stylesheet" href="images/font-awesome.min.css">
   </head>
   <body data-site="" class="site">
     <div data-page="" class="site__page">
@@ -121,7 +122,10 @@
           }
 
       		function receivedPredictionForRisk(risk, response) {
-      			$('.prediction-list').append('<span class="accidents" style="width: 10rem;display: inline-block;margin-top: 2rem;">' + risk.cap() + '</span>' +
+            var icon = 'fa-taxi';
+
+      			$('.prediction-list').append('<span class="accidents" style="width: 10rem;display: inline-block;margin-top: 2rem;">' +
+              '<i class="fa ' + icon + '" aria-hidden="true"></i>' + risk.cap() + '</span>' +
               '<div class="form__group__control" style="display:inline-block">' +
                 '<div data-segmented-control="data-segmented-control" class="segmented-control segmented-control--js" tabindex="0">' +
                   '<label class="segmented-control__item" style="background-color: #0062a9;color: white;">' +
