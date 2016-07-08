@@ -124,6 +124,12 @@
       		function receivedPredictionForRisk(risk, response) {
             var icon = 'fa-taxi';
 
+            if(risk == 'earthquake') {
+              icon = 'fa-exclamation-circle'
+            } else if (risk == 'accident') {
+              icon = 'fa-ambulance'
+            }
+
       			$('.prediction-list').append('<span class="accidents" style="width: 10rem;display: inline-block;margin-top: 2rem;text-align:left;">' +
               '<i class="fa ' + icon + '" aria-hidden="true" style="margin-right:1rem"></i>' + risk.cap() + '</span>' +
               '<div class="form__group__control" style="display:inline-block">' +
