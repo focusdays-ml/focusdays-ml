@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="Agency%20Search%20Page_files/1da4c08a-73a4-4e34-8997-1c1eeb1a8cca.css">
     <link rel="stylesheet" href="Agency%20Search%20Page_files/aem.css">
     <link rel="stylesheet" href="images/font-awesome.min.css">
+<link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+<script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
   </head>
   <body data-site="" class="site">
     <div data-page="" class="site__page">
@@ -125,9 +127,9 @@
             var prediction = response.Results.output1.value.Values[0][0];
 
             if(risk == 'earthquake') {
-              if(prediction < 6) {
+              if(prediction < 4.5) {
                 prediction = 3;
-              } else if(prediction < 10) {
+              } else if(prediction < 5) {
                 prediction = 2;
               } else {
                 prediction = 1;
@@ -151,7 +153,7 @@
                     '<span class="segmented-control__item__label">med</span>' +
                   '</label>' +
                   '<label class="segmented-control__item">' +
-                    '<span class="segmented-control__item__label" style="color: lightgrey;">high</span>' +
+                    '<span class="segmented-control__item__label">high</span>' +
                   '</label>' +
                 '</div>' +
               '</div><br/>');
@@ -194,7 +196,7 @@
                 });
             }, 250)*/
 
-    				xhr.open("POST", "https://pmgeiser.ch/axa-ml/a_" + risk + ".php?lat="+lat+"&lon="+lon);
+    				xhr.open("POST", "http://pmgeiser.ch/axa-ml/a_" + risk + ".php?lat="+lat+"&lon="+lon);
     				xhr.setRequestHeader("authorization", "Bearer u9FjX2cDGUiBU4Qa6vk1Ti78vQr1HM4NLSwGKwLF8H9cnNwmTKFYewkI9TiYwnokbpmFgnlS7Dt6rtq8fjaZxg==");
     				xhr.setRequestHeader("content-type", "application/json");
     				xhr.setRequestHeader("cache-control", "no-cache");
@@ -204,6 +206,7 @@
 			     }
 
       			$(document).ready(function() {
+									 cartodb.createVis('map', 'https://e3chea.carto.com/api/v2/viz/8c2c547e-4501-11e6-a2d2-0e3ff518bd15/viz.json');
       				requestPredictionForEarthquake(getUrlParameter("lon"), getUrlParameter("lat"))
               requestPredictionForAccidents(getUrlParameter("lon"), getUrlParameter("lat"))
               requestPredictionForCrime(getUrlParameter("lon"), getUrlParameter("lat"))
@@ -236,6 +239,7 @@
     height: 350px;
     display: inline-block;
     padding: 1rem;">
+<div id="map" style="background-color: yellow; width: 680px; height=400px"></div>
 	      		</div>
 	      	</div>
 		</div>
