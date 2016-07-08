@@ -185,7 +185,7 @@
     				  }
     				});
 
-            setTimeout(function() {
+            /*setTimeout(function() {
               receivedPredictionForRisk(risk, 
                 {"Results":
                   {"output1":
@@ -194,7 +194,7 @@
                     }
                   }
                 });
-            }, 250)
+            }, 250)*/
 
     				xhr.open("POST", "http://pmgeiser.ch/axa-ml/a_" + risk + ".php?lat="+lat+"&lon="+lon);
     				xhr.setRequestHeader("authorization", "Bearer u9FjX2cDGUiBU4Qa6vk1Ti78vQr1HM4NLSwGKwLF8H9cnNwmTKFYewkI9TiYwnokbpmFgnlS7Dt6rtq8fjaZxg==");
@@ -202,7 +202,7 @@
     				xhr.setRequestHeader("cache-control", "no-cache");
     				xhr.setRequestHeader("postman-token", "810ac858-23b0-6a0e-69da-ddd20cf3a39f");
     				 
-    				//xhr.send();
+    				xhr.send();
 			     }
 
       			$(document).ready(function() {
@@ -236,7 +236,7 @@
     width: 100%;">
 	      		<div class="prediction-list" style="background-color: white;
     width: 680px;
-    height: 350px;
+    height: 300px;
     display: inline-block;
     padding: 1rem;">
 
