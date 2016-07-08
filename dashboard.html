@@ -103,18 +103,18 @@
       	<script>
       		var getUrlParameter = function getUrlParameter(sParam) {
 			    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-			        sURLVariables = sPageURL.split('&'),
-			        sParameterName,
-			        i;
+    			        sURLVariables = sPageURL.split('&'),
+    			        sParameterName,
+    			        i;
 
-			    for (i = 0; i < sURLVariables.length; i++) {
-			        sParameterName = sURLVariables[i].split('=');
+    			    for (i = 0; i < sURLVariables.length; i++) {
+    			        sParameterName = sURLVariables[i].split('=');
 
-			        if (sParameterName[0] === sParam) {
-			            return sParameterName[1] === undefined ? true : sParameterName[1];
-			        }
-			    }
-			};
+    			        if (sParameterName[0] === sParam) {
+    			            return sParameterName[1] === undefined ? true : sParameterName[1];
+    			        }
+    			    }
+    			};
 
       		function receivedPredictionForAccidents(response) {
       			console.log(response)
@@ -122,45 +122,28 @@
       		}
 
       		function requestPredictionForAccidents(lon, lat) {
-	      		var data = JSON.stringify({
-				  "Inputs": {
-				    "location": {
-				      "ColumnNames": [
-				        "lon",
-				        "lat"
-				      ],
-				      "Values": [
-				        [
-				          lon, lat
-				        ]
-				      ]
-				    }
-				  },
-				  "GlobalParameters": {}
-				});
-				 
-				var xhr = new XMLHttpRequest();
-				xhr.withCredentials = true;
-				 
-				xhr.addEventListener("readystatechange", function () {
-				  if (this.readyState === 4) {
-				    receivedPredictionForAccidents(JSON.parse(this.responseText));
-				  }
-				});
-				 
-				xhr.open("POST", "https://ussouthcentral.services.azureml.net/workspaces/0a9667a9907f4b9dba95de9b8432a894/services/f197fccfc7ee494480e288597cb056fd/execute?api-version=2.0&details=true");
-				xhr.setRequestHeader("authorization", "Bearer u9FjX2cDGUiBU4Qa6vk1Ti78vQr1HM4NLSwGKwLF8H9cnNwmTKFYewkI9TiYwnokbpmFgnlS7Dt6rtq8fjaZxg==");
-				xhr.setRequestHeader("content-type", "application/json");
-				xhr.setRequestHeader("cache-control", "no-cache");
-				xhr.setRequestHeader("postman-token", "810ac858-23b0-6a0e-69da-ddd20cf3a39f");
-				 
-				xhr.send(data);
-			}
+    				var xhr = new XMLHttpRequest();
+    				xhr.withCredentials = true;
+    				 
+    				xhr.addEventListener("readystatechange", function () {
+    				  if (this.readyState === 4) {
+    				    receivedPredictionForAccidents(JSON.parse(this.responseText));
+    				  }
+    				});
+    				 
+    				xhr.open("POST", "http://pmgeiser.ch/axa-ml/a_earthquake.php?lat="+lat+"&lon="+lon);
+    				xhr.setRequestHeader("authorization", "Bearer u9FjX2cDGUiBU4Qa6vk1Ti78vQr1HM4NLSwGKwLF8H9cnNwmTKFYewkI9TiYwnokbpmFgnlS7Dt6rtq8fjaZxg==");
+    				xhr.setRequestHeader("content-type", "application/json");
+    				xhr.setRequestHeader("cache-control", "no-cache");
+    				xhr.setRequestHeader("postman-token", "810ac858-23b0-6a0e-69da-ddd20cf3a39f");
+    				 
+    				xhr.send();
+			     }
 
-			$(document).ready(function() {
-				requestPredictionForAccidents(getUrlParameter("lon"), getUrlParameter("lat"))
-				$('#locationName').html(getUrlParameter("locationName"));
-			})
+      			$(document).ready(function() {
+      				requestPredictionForAccidents(getUrlParameter("lon"), getUrlParameter("lat"))
+      				$('#locationName').html(getUrlParameter("locationName"));
+      			})
       	</script>
 		<div class="agencies__searchbox" style="padding-bottom: 8rem;">
 			<picture class="picture keyvisual">
